@@ -1,0 +1,91 @@
+:root {
+  /* --- Void / ink: near-black purples used for page and card grounds --- */
+  --void: #050107;
+  --ink-900: #07020f;
+  --ink-800: #0b0416;
+  --ink-700: #100526;
+  --ink-650: #12042a;
+  --ink-600: #12041f;
+  --ink-500: #1a0630;
+  --ink-450: #160732;
+  --ink-400: #1b0b3a;
+  --ink-350: #2a1052;
+  --ink-300: #2d1063;
+
+  /* --- Violet ramp: the single chromatic family --- */
+  --violet-950: #3c108c;
+  --violet-900: #3b0f7a;
+  --violet-850: #4c1d95;
+  --violet-800: #5b21b6;
+  --violet-700: #6d28d9;
+  --violet-650: #7828dc;
+  --violet-600: #7c3aed;
+  --violet-550: #9333ea;
+  --violet-500: #8b5cf6;
+  --violet-400: #a855f7;
+  --violet-300: #c084fc;
+  --violet-200: #d8b4fe;
+  --violet-100: #e9d5ff;
+  --violet-050: #ede4ff;
+
+  /* --- Lilac / mauve: muted violets for secondary text --- */
+  --lilac-400: #b79aff;
+  --lilac-300: #c4a6ff;
+  --lilac-200: #ddc9ff;
+  --mauve-600: #8a70b0;
+  --mauve-500: #9d84c9;
+  --mauve-400: #a78bc4;
+  --mauve-300: #a385c9;
+  --mauve-200: #a98ede;
+
+  /* --- Warm whites: never pure white for body copy --- */
+  --white-pure: #ffffff;
+  --white-warm: #faf6ff;
+  --white-page: #f7f1ff;
+  --white-soft: #f5f0ff;
+  --white-dim: #efe6ff;
+  --white-mist: #e6dcf7;
+  --white-fog: #ded2f2;
+  --white-haze: #cdc0e6;
+  --white-dusk: #c8bade;
+
+  /* ---------- Semantic aliases ---------- */
+  --bg-page: var(--void);
+  --bg-card-dark: var(--ink-800);
+  --surface-panel: linear-gradient(180deg, rgba(28,12,52,0.96), rgba(11,4,22,0.98));
+  --surface-backdrop: rgba(4,1,9,0.72);
+  --surface-cover-scrim: rgba(10,2,20,0.55);
+
+  --text-display: var(--white-warm);
+  --text-primary: var(--white-soft);
+  --text-body: var(--white-dusk);
+  --text-panel-body: var(--white-mist);
+  --text-list: var(--white-haze);
+  --text-muted: var(--mauve-600);
+  --text-meta: var(--mauve-500);
+  --text-accent: var(--lilac-300);
+  --text-eyebrow: var(--lilac-400);
+  --text-link: var(--violet-200);
+  --text-link-hover: #f3e8ff;
+  --text-on-light: var(--ink-500);
+  --text-on-light-strong: var(--ink-600);
+
+  --accent: var(--violet-400);
+  --accent-strong: var(--violet-600);
+  --selection-bg: var(--violet-600);
+
+  --fill-light: var(--violet-050);      /* primary button face */
+  --fill-light-hover: var(--white-pure);
+  --tint-hover: rgba(168,85,247,0.14);  /* nav link hover */
+  --tint-row-hover: rgba(168,85,247,0.12);
+  --tint-chip: rgba(168,85,247,0.10);
+  --tint-ghost: rgba(168,85,247,0.06);
+
+  --border-hairline: rgba(168,85,247,0.22);
+  --border-panel: rgba(168,85,247,0.28);
+  --border-chip: rgba(168,85,247,0.35);
+  --border-on-light: rgba(255,255,255,0.35);
+  --border-on-light-strong: rgba(255,255,255,0.40);
+  --border-close: rgba(233,213,255,0.28);
+  --rule-quote: rgba(168,85,247,0.50);
+}

@@ -1,0 +1,52 @@
+:root {
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Switzer", system-ui, -apple-system, sans-serif;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* fluid display sizes */
+  --text-hero: clamp(46px, 8vw, 110px);
+  --text-lead: clamp(22px, 3.4vw, 44px);
+  --text-title: clamp(30px, 3.4vw, 46px);
+  --text-h2: clamp(28px, 3vw, 40px);
+  --text-cover-xl: clamp(38px, 4vw, 56px);
+  --text-cover-lg: clamp(30px, 3.1vw, 44px);
+  --text-cover-md: clamp(26px, 2.7vw, 38px);
+  --text-cover-sm: clamp(24px, 2.5vw, 34px);
+
+  /* fixed UI sizes — note the half-pixel values, they are intentional */
+  --text-body: 16.5px;
+  --text-panel: 15.5px;
+  --text-nav-brand: 17px;
+  --text-list: 14.5px;
+  --text-ui: 13.5px;
+  --text-button: 15px;
+  --text-button-sm: 13px;
+  --text-chip: 12.5px;
+  --text-meta: 12px;
+  --text-eyebrow: 11px;
+  --text-caps: 10.5px;
+  --text-caps-xs: 10px;
+
+  --leading-hero: 0.95;
+  --leading-cover: 0.90;
+  --leading-title: 1.08;
+  --leading-heading: 1.05;
+  --leading-snug: 1.2;
+  --leading-list: 1.55;
+  --leading-panel: 1.6;
+  --leading-body: 1.7;
+
+  --track-tighter: -0.045em;
+  --track-tight: -0.03em;
+  --track-snug: -0.02em;
+  --track-neat: -0.01em;
+  --track-caps: 0.14em;
+  --track-eyebrow: 0.20em;
+  --track-cover: 0.22em;
+  --track-wide: 0.42em;
+}

@@ -1,0 +1,35 @@
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 10px;
+  --space-4: 12px;
+  --space-5: 14px;
+  --space-6: 18px;
+  --space-7: 22px;
+  --space-8: 26px;
+  --space-9: 30px;
+  --space-10: 34px;
+  --space-11: 38px;
+  --space-12: 44px;
+  --space-14: 62px;
+  --space-16: 70px;
+
+  --gutter-page: 34px;         /* horizontal page gutter, both pages */
+  --pad-header-y: 22px;
+  --pad-panel: 38px 40px 44px;
+  --gap-nav: 8px;
+  --gap-shelf: clamp(18px, 3.2vw, 54px);
+  --gap-section: 62px;
+
+  --cover-size: clamp(180px, 17vw, 246px);
+  --panel-width: min(760px, 100%); /* @kind spacing */
+  --rail-width: min(1340px, 96%); /* @kind spacing */
+  --measure-body: 56ch; /* @kind spacing */
+  --measure-title: 15ch; /* @kind spacing */
+
+  --radius-rail: 2px;
+  --radius-sm: 8px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+  --radius-cover: 0px;         /* covers are hard-edged squares */
+}

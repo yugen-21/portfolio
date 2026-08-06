@@ -1,0 +1,42 @@
+:root {
+  /* Album-sleeve depth: a dark halo above, a tight contact shadow below, a violet bloom around */
+  --shadow-cover:
+    0 -30px 60px -18px rgba(0,0,0,0.9),
+    0 6px 10px -4px rgba(0,0,0,0.95),
+    0 22px 44px -18px rgba(0,0,0,0.8),
+    0 0 60px -18px rgba(168,85,247,0.5);
+  --shadow-cover-lift:
+    0 -10px 26px -12px rgba(0,0,0,0.7),
+    0 46px 70px -26px rgba(0,0,0,0.95),
+    0 0 100px -22px rgba(168,85,247,0.7);
+  --shadow-panel:
+    0 40px 100px -30px rgba(0,0,0,0.9),
+    0 0 90px -40px rgba(168,85,247,0.6);
+  --shadow-rail:
+    0 26px 44px -18px rgba(0,0,0,0.9),
+    0 0 44px -6px rgba(168,85,247,0.35);
+
+  --blur-backdrop: 14px; /* @kind other */
+  --blur-scrim: 2px; /* @kind other */
+  --blur-aurora-tight: 24px; /* @kind other */
+  --blur-aurora: 34px; /* @kind other */
+  --blur-nebula: 80px; /* @kind other */
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-cover: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-rise: cubic-bezier(0.2, 0.8, 0.2, 1); /* @kind other */
+
+  --dur-fast: 200ms; /* @kind other */
+  --dur-hover: 250ms; /* @kind other */
+  --dur-rise: 350ms; /* @kind other */
+  --dur-swap: 480ms; /* @kind other */
+  --dur-cover: 500ms; /* @kind other */
+  --dur-word: 560ms; /* @kind other */
+
+  --drift-slow: 34s; /* @kind other */
+  --drift-mid: 28s; /* @kind other */
+  --drift-fast: 22s; /* @kind other */
+
+  --rail-face: linear-gradient(180deg, #efe6ff 0%, #c9b6e8 40%, #6b539b 100%); /* @kind color */
+  --scanlines: repeating-linear-gradient(0deg, rgba(255,255,255,0.014) 0px, rgba(255,255,255,0.014) 1px, transparent 1px, transparent 3px); /* @kind other */
+}
