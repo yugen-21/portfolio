@@ -38,5 +38,8 @@
   --drift-fast: 22s; /* @kind other */
 
   --rail-face: linear-gradient(180deg, #efe6ff 0%, #c9b6e8 40%, #6b539b 100%); /* @kind color */
+  /* The shelf's top surface, running back toward the wall: lit at the lip,
+     falling into shadow where it meets the wall. */
+  --rail-top: linear-gradient(180deg, #241442 0%, #4a3672 62%, #b9a4dc 100%); /* @kind color */
   --scanlines: repeating-linear-gradient(0deg, rgba(255,255,255,0.014) 0px, rgba(255,255,255,0.014) 1px, transparent 1px, transparent 3px); /* @kind other */
 }

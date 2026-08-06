@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+<div style={{ fontFamily: "var(--font-sans)", maxWidth: "72ch" }}>
+
+# A. Shama Anjum — design system
+
+Every component in this portfolio, in isolation, with its props on live controls.
+
+The site is a single dark canvas: one violet ramp, two typefaces, and a lot of light.
+Nothing here uses a CSS framework class for its own styling — components are styled
+inline against CSS custom properties, so **the tokens are the API**. Change a token
+and every component that reads it moves together.
+
+## How this is organised
+
+**Foundations** — colours, typography, spacing and effects, read live off `:root`.
+These pages cannot drift from `src/styles/tokens/*.css`, because they resolve the
+same variables the components do. Start here when you want to change how the whole
+site feels rather than one component.
+
+**Core** — the four primitives: `SpecularButton`, `NavLink`, `EyebrowLabel`, `Tag`.
+
+**Effects** — the three text and motion pieces: `ParticleText`, `RotatingText`,
+`LogoLoop`. All three are canvas or rAF driven and all three honour
+`prefers-reduced-motion`.
+
+**Backdrop** — the fixed light layers: `Aurora`, `AuroraLayer`, `Particles`. These
+render full-viewport, so their stories are fullscreen.
+
+**Portfolio** — the shelf: `ProjectCover`, `ShelfRail`, `IndexRow`, `ProjectPanel`,
+`StackGroups`.
+
+**Pages** — `Landing`, `Work`, `About`, and the whole site composed in one frame.
+
+## Working in here
+
+- Every prop has a control, grouped by category — appearance, motion, shader, and so on.
+- Stories named **In context** show a component inside the arrangement the real page
+  uses, which is usually where a change actually needs judging.
+- The toolbar switches page ground and viewport. The site has **no media queries** —
+  every breakpoint is a `clamp()` — so resizing is the only way to see responsive
+  behaviour, and the fluid tokens in Foundations report what they resolve to as you drag.
+
+## Two things that will bite
+
+`LogoLoop` and the About page pull their icons from the jsDelivr CDN, so **those
+stories need network access** to show real logos. The `React node logos` story works offline.
+
+`SpecularButton` and `Particles` need WebGL. Without it the button still renders and
+clicks — it just loses the highlight.
+
+</div>
