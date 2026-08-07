@@ -1,5 +1,15 @@
 @import "./styles/tokens/fonts.css";
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* Tailwind's automatic detection scans every non-ignored file in the repo and
+   extracts bare words from prose, comments and style-object values as class
+   candidates — a README sentence or a custom-property name is enough to emit a
+   utility the site never renders.
+   The pages are the only files that use utility classes; everything under ds/
+   is styled inline against the tokens. So only pages are scanned.
+   >> If you start using Tailwind classes anywhere else, add its path here or
+      those classes will not be generated. << */
+@source "./pages/**/*.jsx";
 
 @import "./styles/tokens/colors.css";
 @import "./styles/tokens/typography.css";
