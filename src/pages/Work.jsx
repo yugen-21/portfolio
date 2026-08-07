@@ -12,7 +12,10 @@ import { useCoverArtScale } from "../hooks/useShelfFit.js";
 function Shelf({ projects, offset, liftedIndex, onCoverClick, artScale }) {
   return (
     <>
-      <section className="flex items-end justify-center flex-wrap" style={{ gap: "var(--gap-shelf)" }}>
+      <section
+        className="flex items-end justify-center flex-wrap"
+        style={{ gap: "var(--gap-shelf)" }}
+      >
         {projects.map((p, i) => (
           <ProjectCover
             key={p.name}
@@ -23,7 +26,14 @@ function Shelf({ projects, offset, liftedIndex, onCoverClick, artScale }) {
             lifted={liftedIndex === offset + i}
             onClick={() => onCoverClick(offset + i)}
           >
-            <div style={{ position: "absolute", inset: 0, transform: `scale(${artScale})`, transformOrigin: "center" }}>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                transform: `scale(${artScale})`,
+                transformOrigin: "center",
+              }}
+            >
               {COVER_ART[p.art]}
             </div>
           </ProjectCover>
@@ -52,15 +62,57 @@ export function Work({ onBrand, onAbout, selected, onOpen, onClose }) {
       <AuroraLayer blobs={WORK_BLOBS} parallax />
 
       <header className="relative z-[3] flex items-center gap-6 flex-wrap px-[34px] py-[14px] shrink-0">
-        <div className="flex items-baseline gap-3.5 cursor-pointer" onClick={onBrand}>
-          <span style={{ fontSize: "var(--text-nav-brand)", fontWeight: 600, letterSpacing: "var(--track-neat)", color: "var(--text-display)" }}>A. Shama Anjum</span>
-          <span style={{ fontSize: 13, color: "var(--mauve-400)", letterSpacing: "0.02em" }}>Software Engineer</span>
+        <div
+          className="flex items-baseline gap-3.5 cursor-pointer"
+          onClick={onBrand}
+        >
+          <span
+            style={{
+              fontSize: "var(--text-nav-brand)",
+              fontWeight: 600,
+              letterSpacing: "var(--track-neat)",
+              color: "var(--text-display)",
+            }}
+          >
+            Shama Anjum
+          </span>
+          <span
+            style={{
+              fontSize: 13,
+              color: "var(--mauve-400)",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Software Engineer
+          </span>
         </div>
         <nav className="flex items-center gap-2 ml-auto">
-          <a onClick={(e) => { e.preventDefault(); onAbout(); }} href="#" style={{ fontSize: "var(--text-ui)", padding: "9px 14px", borderRadius: "var(--radius-pill)", color: "#d9c8f5" }}>About</a>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              onAbout();
+            }}
+            href="#"
+            style={{
+              fontSize: "var(--text-ui)",
+              padding: "9px 14px",
+              borderRadius: "var(--radius-pill)",
+              color: "#d9c8f5",
+            }}
+          >
+            About
+          </a>
           <NavLink href="mailto:shamaazath@gmail.com">Email</NavLink>
-          <NavLink href="https://www.linkedin.com/in/a-shama-anjum/" external>LinkedIn</NavLink>
-          <NavLink href="https://github.com/yugen-21" external emphasis="strong">GitHub</NavLink>
+          <NavLink href="https://www.linkedin.com/in/a-shama-anjum/" external>
+            LinkedIn
+          </NavLink>
+          <NavLink
+            href="https://github.com/yugen-21"
+            external
+            emphasis="strong"
+          >
+            GitHub
+          </NavLink>
         </nav>
       </header>
 
@@ -78,13 +130,29 @@ export function Work({ onBrand, onAbout, selected, onOpen, onClose }) {
             textWrap: "pretty",
           }}
         >
-          Making solutions to real-world problems <span style={{ color: "var(--mauve-300)" }}>since 2023.</span>
+          Making solutions to real-world problems{" "}
+          <span style={{ color: "var(--mauve-300)" }}>since 2023.</span>
         </h1>
       </div>
 
-      <div className="relative z-[3] flex flex-col px-[34px] pt-9 shrink-0" style={{ gap: "var(--gap-section)" }}>
-        <Shelf projects={PROJECTS.slice(0, 4)} offset={0} liftedIndex={liftedIndex} onCoverClick={handleCoverClick} artScale={artScale} />
-        <Shelf projects={PROJECTS.slice(4, 7)} offset={4} liftedIndex={liftedIndex} onCoverClick={handleCoverClick} artScale={artScale} />
+      <div
+        className="relative z-[3] flex flex-col px-[34px] pt-9 shrink-0"
+        style={{ gap: "var(--gap-section)" }}
+      >
+        <Shelf
+          projects={PROJECTS.slice(0, 4)}
+          offset={0}
+          liftedIndex={liftedIndex}
+          onCoverClick={handleCoverClick}
+          artScale={artScale}
+        />
+        <Shelf
+          projects={PROJECTS.slice(4, 7)}
+          offset={4}
+          liftedIndex={liftedIndex}
+          onCoverClick={handleCoverClick}
+          artScale={artScale}
+        />
       </div>
 
       <div
@@ -92,11 +160,18 @@ export function Work({ onBrand, onAbout, selected, onOpen, onClose }) {
         style={{ borderTop: "1px solid var(--border-hairline)" }}
       >
         {PROJECTS.map((p, i) => (
-          <IndexRow key={p.name} year={p.year} name={p.name} onClick={() => handleCoverClick(i)} />
+          <IndexRow
+            key={p.name}
+            year={p.year}
+            name={p.name}
+            onClick={() => handleCoverClick(i)}
+          />
         ))}
       </div>
 
-      {selected != null && <ProjectPanel project={PROJECTS[selected]} onClose={onClose} />}
+      {selected != null && (
+        <ProjectPanel project={PROJECTS[selected]} onClose={onClose} />
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-# A. Shama Anjum — portfolio
+# Shama Anjum — portfolio
 
 A single-page portfolio built with React 19, Vite and Tailwind 4. Three views —
 landing, work and about — with state-based navigation rather than a router.
@@ -11,13 +11,13 @@ npm run dev          # app on http://localhost:5173
 npm run storybook    # component library on http://localhost:6006
 ```
 
-| Script | What it does |
-| --- | --- |
-| `npm run dev` | Vite dev server |
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Serve the production build |
-| `npm run lint` | Oxlint |
-| `npm run storybook` | Storybook dev server |
+| Script                    | What it does                            |
+| ------------------------- | --------------------------------------- |
+| `npm run dev`             | Vite dev server                         |
+| `npm run build`           | Production build to `dist/`             |
+| `npm run preview`         | Serve the production build              |
+| `npm run lint`            | Oxlint                                  |
+| `npm run storybook`       | Storybook dev server                    |
 | `npm run build-storybook` | Static Storybook to `storybook-static/` |
 
 ## Storybook

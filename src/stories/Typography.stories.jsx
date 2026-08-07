@@ -1,18 +1,72 @@
 import React from "react";
 import { Page, Section, Mono, useVars } from "./_helpers.jsx";
 
-const DISPLAY_SIZES = ["--text-hero", "--text-lead", "--text-title", "--text-h2", "--text-cover-xl", "--text-cover-lg", "--text-cover-md", "--text-cover-sm"];
-const UI_SIZES = ["--text-body", "--text-panel", "--text-nav-brand", "--text-list", "--text-ui", "--text-button", "--text-button-sm", "--text-chip", "--text-meta", "--text-eyebrow", "--text-caps", "--text-caps-xs"];
-const LEADING = ["--leading-hero", "--leading-cover", "--leading-title", "--leading-heading", "--leading-snug", "--leading-list", "--leading-panel", "--leading-body"];
-const TRACKING = ["--track-tighter", "--track-tight", "--track-snug", "--track-neat", "--track-caps", "--track-eyebrow", "--track-cover", "--track-wide"];
-const WEIGHTS = ["--weight-light", "--weight-regular", "--weight-medium", "--weight-semibold", "--weight-bold"];
+const DISPLAY_SIZES = [
+  "--text-hero",
+  "--text-lead",
+  "--text-title",
+  "--text-h2",
+  "--text-cover-xl",
+  "--text-cover-lg",
+  "--text-cover-md",
+  "--text-cover-sm",
+];
+const UI_SIZES = [
+  "--text-body",
+  "--text-panel",
+  "--text-nav-brand",
+  "--text-list",
+  "--text-ui",
+  "--text-button",
+  "--text-button-sm",
+  "--text-chip",
+  "--text-meta",
+  "--text-eyebrow",
+  "--text-caps",
+  "--text-caps-xs",
+];
+const LEADING = [
+  "--leading-hero",
+  "--leading-cover",
+  "--leading-title",
+  "--leading-heading",
+  "--leading-snug",
+  "--leading-list",
+  "--leading-panel",
+  "--leading-body",
+];
+const TRACKING = [
+  "--track-tighter",
+  "--track-tight",
+  "--track-snug",
+  "--track-neat",
+  "--track-caps",
+  "--track-eyebrow",
+  "--track-cover",
+  "--track-wide",
+];
+const WEIGHTS = [
+  "--weight-light",
+  "--weight-regular",
+  "--weight-medium",
+  "--weight-semibold",
+  "--weight-bold",
+];
 
-const ALL = DISPLAY_SIZES.concat(UI_SIZES, LEADING, TRACKING, WEIGHTS, ["--font-display", "--font-sans"]);
+const ALL = DISPLAY_SIZES.concat(UI_SIZES, LEADING, TRACKING, WEIGHTS, [
+  "--font-display",
+  "--font-sans",
+]);
 
-const CAPS_TRACKS = ["--track-caps", "--track-eyebrow", "--track-cover", "--track-wide"];
+const CAPS_TRACKS = [
+  "--track-caps",
+  "--track-eyebrow",
+  "--track-cover",
+  "--track-wide",
+];
 
 const DISPLAY_SAMPLES = {
-  "--text-hero": "A. Shama Anjum",
+  "--text-hero": "Shama Anjum",
   "--text-lead": "Full Stack Engineer",
   "--text-title": "Making solutions to real-world problems since 2023.",
   "--text-h2": "Where I have worked",
@@ -25,8 +79,9 @@ const DISPLAY_SAMPLES = {
 const UI_SAMPLES = {
   "--text-body": "I turn messy problems into products people can actually use.",
   "--text-panel": "An AI governance platform for hospitals.",
-  "--text-nav-brand": "A. Shama Anjum",
-  "--text-list": "Nine intelligence domains, from clinical safety to cybersecurity.",
+  "--text-nav-brand": "Shama Anjum",
+  "--text-list":
+    "Nine intelligence domains, from clinical safety to cybersecurity.",
   "--text-ui": "LinkedIn",
   "--text-button": "View work",
   "--text-button-sm": "Open",
@@ -37,7 +92,8 @@ const UI_SAMPLES = {
   "--text-caps-xs": "2023",
 };
 
-const PARA = "I turn messy problems into products people can actually use. Seven of them since 2023, from a campus outpass system to a platform that diagnoses hospitals.";
+const PARA =
+  "I turn messy problems into products people can actually use. Seven of them since 2023, from a campus outpass system to a platform that diagnoses hospitals.";
 
 /** Renders a specimen at the token size and reports what it actually resolves to. */
 function SizeSpecimen({ token, spec, display, sample }) {
@@ -50,17 +106,35 @@ function SizeSpecimen({ token, spec, display, sample }) {
     };
     measure();
     window.addEventListener("resize", measure);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure).catch(() => {});
+    if (document.fonts && document.fonts.ready)
+      document.fonts.ready.then(measure).catch(() => {});
     return () => window.removeEventListener("resize", measure);
   }, []);
 
   return (
-    <div style={{ padding: "20px 0", borderTop: "1px solid var(--border-hairline)" }}>
-      <div style={{ display: "flex", gap: 16, alignItems: "baseline", flexWrap: "wrap", marginBottom: 10 }}>
+    <div
+      style={{
+        padding: "20px 0",
+        borderTop: "1px solid var(--border-hairline)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          alignItems: "baseline",
+          flexWrap: "wrap",
+          marginBottom: 10,
+        }}
+      >
         <Mono>{token}</Mono>
         <Mono dim>{spec}</Mono>
-        <span style={{ fontSize: "var(--text-meta)", color: "var(--text-muted)" }}>
-          renders at <span style={{ color: "var(--text-accent)" }}>{px || "…"}</span> at this width
+        <span
+          style={{ fontSize: "var(--text-meta)", color: "var(--text-muted)" }}
+        >
+          renders at{" "}
+          <span style={{ color: "var(--text-accent)" }}>{px || "…"}</span> at
+          this width
         </span>
       </div>
       <div
@@ -69,7 +143,9 @@ function SizeSpecimen({ token, spec, display, sample }) {
           fontFamily: display ? "var(--font-display)" : "var(--font-sans)",
           fontSize: `var(${token})`,
           fontWeight: display ? 400 : undefined,
-          lineHeight: display ? "var(--leading-heading)" : "var(--leading-body)",
+          lineHeight: display
+            ? "var(--leading-heading)"
+            : "var(--leading-body)",
           color: "var(--text-display)",
           textWrap: "pretty",
         }}
@@ -88,22 +164,70 @@ function FamiliesView() {
       intro="Instrument Serif carries the name and every heading. Switzer carries the interface. Nothing else is loaded — if a third voice is needed, it should replace one of these rather than join them."
     >
       <Section title="Display — --font-display" note={vars["--font-display"]}>
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "var(--text-title)", color: "var(--text-display)", lineHeight: "var(--leading-heading)" }}>
-          A. Shama Anjum
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 400,
+            fontSize: "var(--text-title)",
+            color: "var(--text-display)",
+            lineHeight: "var(--leading-heading)",
+          }}
+        >
+          Shama Anjum
         </div>
-        <div style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontStyle: "italic", fontSize: "var(--text-h2)", color: "var(--text-accent)", marginTop: 10 }}>
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 400,
+            fontStyle: "italic",
+            fontSize: "var(--text-h2)",
+            color: "var(--text-accent)",
+            marginTop: 10,
+          }}
+        >
           Making solutions to real-world problems since 2023.
         </div>
-        <div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "var(--text-body)", marginTop: 16, letterSpacing: "0.02em" }}>
-          ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789 &amp; . , ; : ! ? — –
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 22,
+            color: "var(--text-body)",
+            marginTop: 16,
+            letterSpacing: "0.02em",
+          }}
+        >
+          ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          <br />
+          abcdefghijklmnopqrstuvwxyz
+          <br />
+          0123456789 &amp; . , ; : ! ? — –
         </div>
       </Section>
 
       <Section title="Sans — --font-sans" note={vars["--font-sans"]}>
         {WEIGHTS.map((w) => (
-          <div key={w} style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 20, alignItems: "baseline", padding: "11px 0", borderTop: "1px solid var(--border-hairline)" }}>
-            <div><Mono>{w}</Mono> <Mono dim>{vars[w]}</Mono></div>
-            <div style={{ fontFamily: "var(--font-sans)", fontWeight: vars[w] || 400, fontSize: "var(--text-body)", color: "var(--text-display)" }}>
+          <div
+            key={w}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "200px 1fr",
+              gap: 20,
+              alignItems: "baseline",
+              padding: "11px 0",
+              borderTop: "1px solid var(--border-hairline)",
+            }}
+          >
+            <div>
+              <Mono>{w}</Mono> <Mono dim>{vars[w]}</Mono>
+            </div>
+            <div
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontWeight: vars[w] || 400,
+                fontSize: "var(--text-body)",
+                color: "var(--text-display)",
+              }}
+            >
               I turn messy problems into products people can actually use.
             </div>
           </div>
@@ -122,7 +246,13 @@ function DisplayScaleView() {
     >
       <Section title="Fluid display sizes">
         {DISPLAY_SIZES.map((t) => (
-          <SizeSpecimen key={t} token={t} spec={vars[t]} display sample={DISPLAY_SAMPLES[t]} />
+          <SizeSpecimen
+            key={t}
+            token={t}
+            spec={vars[t]}
+            display
+            sample={DISPLAY_SAMPLES[t]}
+          />
         ))}
       </Section>
     </Page>
@@ -138,7 +268,12 @@ function UIScaleView() {
     >
       <Section title="Fixed interface sizes">
         {UI_SIZES.map((t) => (
-          <SizeSpecimen key={t} token={t} spec={vars[t]} sample={UI_SAMPLES[t]} />
+          <SizeSpecimen
+            key={t}
+            token={t}
+            spec={vars[t]}
+            sample={UI_SAMPLES[t]}
+          />
         ))}
       </Section>
     </Page>
@@ -154,9 +289,27 @@ function LeadingAndTrackingView() {
     >
       <Section title="Line height">
         {LEADING.map((t) => (
-          <div key={t} style={{ padding: "16px 0", borderTop: "1px solid var(--border-hairline)" }}>
-            <div style={{ marginBottom: 8 }}><Mono>{t}</Mono> <Mono dim>{vars[t]}</Mono></div>
-            <p style={{ margin: 0, maxWidth: "56ch", fontSize: "var(--text-body)", lineHeight: vars[t] || 1.5, color: "var(--text-body)" }}>{PARA}</p>
+          <div
+            key={t}
+            style={{
+              padding: "16px 0",
+              borderTop: "1px solid var(--border-hairline)",
+            }}
+          >
+            <div style={{ marginBottom: 8 }}>
+              <Mono>{t}</Mono> <Mono dim>{vars[t]}</Mono>
+            </div>
+            <p
+              style={{
+                margin: 0,
+                maxWidth: "56ch",
+                fontSize: "var(--text-body)",
+                lineHeight: vars[t] || 1.5,
+                color: "var(--text-body)",
+              }}
+            >
+              {PARA}
+            </p>
           </div>
         ))}
       </Section>
@@ -165,16 +318,28 @@ function LeadingAndTrackingView() {
         {TRACKING.map((t) => {
           const isCaps = CAPS_TRACKS.indexOf(t) !== -1;
           return (
-            <div key={t} style={{ padding: "16px 0", borderTop: "1px solid var(--border-hairline)" }}>
-              <div style={{ marginBottom: 8 }}><Mono>{t}</Mono> <Mono dim>{vars[t]}</Mono></div>
-              <div style={{
-                fontSize: isCaps ? "var(--text-caps)" : 30,
-                fontFamily: isCaps ? "var(--font-sans)" : "var(--font-display)",
-                textTransform: isCaps ? "uppercase" : "none",
-                letterSpacing: vars[t],
-                color: "var(--text-display)",
-              }}>
-                A. Shama Anjum
+            <div
+              key={t}
+              style={{
+                padding: "16px 0",
+                borderTop: "1px solid var(--border-hairline)",
+              }}
+            >
+              <div style={{ marginBottom: 8 }}>
+                <Mono>{t}</Mono> <Mono dim>{vars[t]}</Mono>
+              </div>
+              <div
+                style={{
+                  fontSize: isCaps ? "var(--text-caps)" : 30,
+                  fontFamily: isCaps
+                    ? "var(--font-sans)"
+                    : "var(--font-display)",
+                  textTransform: isCaps ? "uppercase" : "none",
+                  letterSpacing: vars[t],
+                  color: "var(--text-display)",
+                }}
+              >
+                Shama Anjum
               </div>
             </div>
           );
@@ -199,8 +364,14 @@ export default {
 
 export const Families = { render: () => <FamiliesView /> };
 
-export const DisplayScale = { name: "Display scale", render: () => <DisplayScaleView /> };
+export const DisplayScale = {
+  name: "Display scale",
+  render: () => <DisplayScaleView />,
+};
 
 export const UIScale = { name: "UI scale", render: () => <UIScaleView /> };
 
-export const LeadingAndTracking = { name: "Leading & tracking", render: () => <LeadingAndTrackingView /> };
+export const LeadingAndTracking = {
+  name: "Leading & tracking",
+  render: () => <LeadingAndTrackingView />,
+};
