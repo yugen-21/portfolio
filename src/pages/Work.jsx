@@ -34,7 +34,7 @@ function Shelf({ projects, offset, liftedIndex, onCoverClick, artScale }) {
   );
 }
 
-export function Work({ onBrand, selected, onOpen, onClose }) {
+export function Work({ onBrand, onAbout, selected, onOpen, onClose }) {
   const [liftedIndex, setLiftedIndex] = React.useState(null);
   const artScale = useCoverArtScale();
 
@@ -57,6 +57,7 @@ export function Work({ onBrand, selected, onOpen, onClose }) {
           <span style={{ fontSize: 13, color: "var(--mauve-400)", letterSpacing: "0.02em" }}>Software Engineer</span>
         </div>
         <nav className="flex items-center gap-2 ml-auto">
+          <a onClick={(e) => { e.preventDefault(); onAbout(); }} href="#" style={{ fontSize: "var(--text-ui)", padding: "9px 14px", borderRadius: "var(--radius-pill)", color: "#d9c8f5" }}>About</a>
           <NavLink href="mailto:shamaazath@gmail.com">Email</NavLink>
           <NavLink href="https://www.linkedin.com/in/a-shama-anjum/" external>LinkedIn</NavLink>
           <NavLink href="https://github.com/yugen-21" external emphasis="strong">GitHub</NavLink>

@@ -10,13 +10,13 @@ import { CoverMotionContext, prefersReducedMotion } from "./coverMotion.js";
  * it in. The rise is deliberately small; the lean coming out is what reads as
  * the pickup, not the height.
  */
-const REST_TILT_X = 14;  // the lean — top resting back against the wall
-const REST_TILT_Y = 0;   // square left-to-right; no sideways skew
+const REST_TILT_X = 14; // the lean — top resting back against the wall
+const REST_TILT_Y = 0; // square left-to-right; no sideways skew
 const TILT_MS = 420;
 const LIFT_MS = 560;
-const OVERLAP = 0.4;     // fraction of the first move the second starts inside
+const OVERLAP = 0.4; // fraction of the first move the second starts inside
 
-const DEFAULT_ACTIONS = [{ label: "Open" }, { label: "Details" }];
+const DEFAULT_ACTIONS = [{ label: "Open" }];
 
 /** Current translateY of an element, so an interrupted move can be reversed from where it is. */
 const currentY = (el) => {
@@ -71,15 +71,28 @@ export function ProjectCover({
     // its way up as it leaves the wall instead of jumping once it gets there.
     const partial = up * liftSplit;
 
-    const restState = { rotateX: restX, rotateY: restY, translateY: 0, translateZ: 0, scale: 1 };
-    const raisedState = { rotateX: 0, rotateY: 0, translateY: -up, translateZ: z, scale };
+    const restState = {
+      rotateX: restX,
+      rotateY: restY,
+      translateY: 0,
+      translateZ: 0,
+      scale: 1,
+    };
+    const raisedState = {
+      rotateX: 0,
+      rotateY: 0,
+      translateY: -up,
+      translateZ: z,
+      scale,
+    };
     const pills = actionsRef.current ? actionsRef.current.children : null;
 
     // First paint and reduced-motion visitors get the end state outright.
     if (first.current || prefersReducedMotion()) {
       first.current = false;
       utils.set(el, raised ? raisedState : restState);
-      if (pills && pills.length) utils.set(pills, { opacity: raised ? 1 : 0, translateY: 0 });
+      if (pills && pills.length)
+        utils.set(pills, { opacity: raised ? 1 : 0, translateY: 0 });
       return undefined;
     }
 
@@ -89,20 +102,27 @@ export function ProjectCover({
     // interrupted hovers can never leave the lean a fraction off where it
     // started.
     const timeline = createTimeline(
-      raised ? {} : { onComplete: () => utils.set(el, restState) }
+      raised ? {} : { onComplete: () => utils.set(el, restState) },
     );
     if (raised) {
       // One: off the wall and forward, already rising. Two: straight up.
       timeline
         .add(
           el,
-          { rotateX: 0, rotateY: 0, translateZ: z, translateY: -partial, duration: tiltDuration, ease: "outQuart" },
-          0
+          {
+            rotateX: 0,
+            rotateY: 0,
+            translateZ: z,
+            translateY: -partial,
+            duration: tiltDuration,
+            ease: "outQuart",
+          },
+          0,
         )
         .add(
           el,
           { translateY: -up, scale, duration: liftDuration, ease: "outBack" },
-          Math.round(tiltDuration * (1 - overlap))
+          Math.round(tiltDuration * (1 - overlap)),
         );
     } else {
       // Mirror image: come down to the hand-off height, then back to the wall.
@@ -111,17 +131,41 @@ export function ProjectCover({
       const airborne = Math.abs(currentY(el)) > partial + 1.5;
       if (airborne) {
         timeline
-          .add(el, { translateY: -partial, scale: 1, duration: liftDuration, ease: "inQuad" }, 0)
           .add(
             el,
-            { rotateX: restX, rotateY: restY, translateZ: 0, translateY: 0, duration: tiltDuration, ease: "outQuart" },
-            Math.round(liftDuration * (1 - overlap))
+            {
+              translateY: -partial,
+              scale: 1,
+              duration: liftDuration,
+              ease: "inQuad",
+            },
+            0,
+          )
+          .add(
+            el,
+            {
+              rotateX: restX,
+              rotateY: restY,
+              translateZ: 0,
+              translateY: 0,
+              duration: tiltDuration,
+              ease: "outQuart",
+            },
+            Math.round(liftDuration * (1 - overlap)),
           );
       } else {
         timeline.add(
           el,
-          { rotateX: restX, rotateY: restY, translateZ: 0, translateY: 0, scale: 1, duration: tiltDuration, ease: "outQuart" },
-          0
+          {
+            rotateX: restX,
+            rotateY: restY,
+            translateZ: 0,
+            translateY: 0,
+            scale: 1,
+            duration: tiltDuration,
+            ease: "outQuart",
+          },
+          0,
         );
       }
     }
@@ -132,19 +176,36 @@ export function ProjectCover({
         opacity: raised ? 1 : 0,
         translateY: raised ? [12, 0] : 8,
         duration: Math.round(liftDuration * 0.6),
-        delay: raised ? stagger(70, { start: Math.round(tiltDuration * 0.55) }) : stagger(40),
+        delay: raised
+          ? stagger(70, { start: Math.round(tiltDuration * 0.55) })
+          : stagger(40),
         ease: raised ? "outBack" : "inQuad",
       });
     }
 
     return () => timeline.pause();
   }, [
-    raised, lifted, tilt, restTiltX, restTiltY, lift, liftedLift, liftSplit,
-    depthPop, liftedDepthPop, hoverScale, liftedScale,
-    tiltDuration, liftDuration, overlap,
+    raised,
+    lifted,
+    tilt,
+    restTiltX,
+    restTiltY,
+    lift,
+    liftedLift,
+    liftSplit,
+    depthPop,
+    liftedDepthPop,
+    hoverScale,
+    liftedScale,
+    tiltDuration,
+    liftDuration,
+    overlap,
   ]);
 
-  const motion = React.useMemo(() => ({ raised, ms: liftDuration }), [raised, liftDuration]);
+  const motion = React.useMemo(
+    () => ({ raised, ms: liftDuration }),
+    [raised, liftDuration],
+  );
 
   return (
     <div
@@ -177,23 +238,41 @@ export function ProjectCover({
           background,
           transformOrigin: pivot,
           willChange: "transform",
-          boxShadow: raised ? "var(--shadow-cover-lift)" : "var(--shadow-cover)",
+          boxShadow: raised
+            ? "var(--shadow-cover-lift)"
+            : "var(--shadow-cover)",
           // Transform is driven by anime.js; only the shadow crossfades in CSS.
           transition: "box-shadow var(--dur-cover) ease",
         }}
       >
-        <CoverMotionContext.Provider value={motion}>{children}</CoverMotionContext.Provider>
+        <CoverMotionContext.Provider value={motion}>
+          {children}
+        </CoverMotionContext.Provider>
 
-        <EyebrowLabel tone="year" color={captionColor} style={{ position: "absolute", left: 18, top: 18 }}>{year}</EyebrowLabel>
-        <EyebrowLabel tone="caption" color={captionColor} style={{ position: "absolute", left: 18, right: 18, bottom: 20 }}>{caption}</EyebrowLabel>
+        <EyebrowLabel
+          tone="year"
+          color={captionColor}
+          style={{ position: "absolute", left: 18, top: 18 }}
+        >
+          {year}
+        </EyebrowLabel>
+        <EyebrowLabel
+          tone="caption"
+          color={captionColor}
+          style={{ position: "absolute", left: 18, right: 18, bottom: 20 }}
+        >
+          {caption}
+        </EyebrowLabel>
 
         <div
           aria-hidden={!raised}
           style={{
-            position: "absolute", inset: 0,
+            position: "absolute",
+            inset: 0,
             // Weighted to the bottom, and no blur: the pills get their contrast
             // while the artwork above stays legible enough to watch it move.
-            background: "linear-gradient(180deg, rgba(10,2,20,0) 34%, rgba(10,2,20,0.55) 62%, rgba(10,2,20,0.82) 100%)",
+            background:
+              "linear-gradient(180deg, rgba(10,2,20,0) 34%, rgba(10,2,20,0.55) 62%, rgba(10,2,20,0.82) 100%)",
             opacity: raised ? 1 : 0,
             pointerEvents: raised ? "auto" : "none",
             transition: "opacity var(--dur-hover)",
@@ -202,8 +281,14 @@ export function ProjectCover({
           <div
             ref={actionsRef}
             style={{
-              position: "absolute", left: 0, right: 0, bottom: "17%",
-              display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap",
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: "17%",
+              display: "flex",
+              justifyContent: "center",
+              gap: 10,
+              flexWrap: "wrap",
             }}
           >
             {actions.map((action) => (
