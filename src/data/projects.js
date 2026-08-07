@@ -137,7 +137,7 @@ export const PROJECTS = [
       "See who has gone silent, flag it, and switch to someone else",
     ],
     stack: ["React JS", "Tailwind CSS", "Python FastAPI", "PostgreSQL", "Azure Cloud"],
-    links: [],
+    links: [{ label: "View live", href: "https://blockmove-frontend.vercel.app/" }],
   },
 ];
 
