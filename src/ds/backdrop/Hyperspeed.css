@@ -1,0 +1,14 @@
+#lights {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+/* Vendored source ships this as a bare `canvas { ... }` rule. Scoped to #lights
+   here: unscoped it also matches ParticleText and the Particles backdrop, whose
+   canvases size themselves. Behaviour inside Hyperspeed is unchanged. */
+#lights canvas {
+  width: 100%;
+  height: 100%;
+}
