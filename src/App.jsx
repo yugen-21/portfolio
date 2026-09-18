@@ -2,7 +2,8 @@ import React from "react";
 import { Landing } from "./pages/Landing.jsx";
 import { Work } from "./pages/Work.jsx";
 import { About } from "./pages/About.jsx";
-import { Particles } from "./ds/backdrop/Particles.jsx";
+import { Starfield } from "./ds/backdrop/Starfield.jsx";
+import { SiteFooter } from "./components/SiteFooter.jsx";
 
 export default function App() {
   const [view, setView] = React.useState("landing");
@@ -25,18 +26,7 @@ export default function App() {
   return (
     <>
       <div style={{ position: "fixed", inset: 0, zIndex: 1, pointerEvents: "none" }}>
-        <Particles
-          particleColors={["#c4a6ff", "#a855f7", "#ede4ff"]}
-          particleCount={140}
-          particleSpread={14}
-          speed={0.06}
-          particleBaseSize={60}
-          sizeRandomness={1}
-          alphaParticles
-          moveParticlesOnHover
-          particleHoverFactor={0.4}
-          pixelRatio={1}
-        />
+        <Starfield />
       </div>
 
       {view === "landing" && (
@@ -53,6 +43,8 @@ export default function App() {
       {view === "about" && (
         <About onBrand={() => goto("landing")} onWork={() => goto("work")} />
       )}
+
+      <SiteFooter />
     </>
   );
 }

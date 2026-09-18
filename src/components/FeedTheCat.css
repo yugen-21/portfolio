@@ -1,0 +1,6 @@
+/* The keyboard path into the feed-the-cat game: an invisible button over the
+   fish that only shows itself as a pixel-square focus ring. */
+.ftc-key:focus-visible {
+  outline: 2px solid var(--lilac-300);
+  outline-offset: 2px;
+}
