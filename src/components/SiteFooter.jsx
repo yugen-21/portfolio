@@ -21,7 +21,7 @@ export function SiteFooter() {
       }}
     >
       <p style={{ margin: 0, fontSize: "var(--text-meta)", letterSpacing: "0.02em", color: "var(--text-muted)" }}>
-        Designed and built by A. Shama Anjum, {new Date().getFullYear()}.
+        Designed and built by Shama Anjum, {new Date().getFullYear()}.
       </p>
       <FeedTheCat />
     </footer>

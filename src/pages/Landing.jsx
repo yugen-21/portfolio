@@ -52,10 +52,10 @@ export function Landing({ onViewWork, onViewAbout, backdrop }) {
           <div
             className="mt-[22px]"
             style={{ height: "clamp(92px,13vw,168px)", fontFamily: "var(--font-display)" }}
-            aria-label="A. Shama Anjum"
+            aria-label="Shama Anjum"
           >
             <ParticleText
-              text="A. Shama Anjum"
+              text="Shama Anjum"
               align="left"
               trigger="mount"
               density={3}

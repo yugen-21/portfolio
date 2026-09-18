@@ -73,7 +73,7 @@ export default {
   },
   args: {
     logo: "/favicon.svg",
-    logoAlt: "A. Shama Anjum",
+    logoAlt: "Shama Anjum",
     items: PALETTE_ITEMS,
     baseColor: INK_700,
     menuColor: VIOLET_050,

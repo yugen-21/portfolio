@@ -35,6 +35,7 @@ export default function App() {
       {view === "work" && (
         <Work
           onBrand={() => goto("landing")}
+          onAbout={() => goto("about")}
           selected={selected}
           onOpen={setSelected}
           onClose={closePanel}

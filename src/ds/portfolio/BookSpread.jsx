@@ -422,7 +422,7 @@ function Cover({ project, book }) {
       <div style={{ width: 92, height: 4, marginTop: 22, background: book.foil }} />
       <div style={{ ...caps, marginTop: 16 }}>{project.caption}</div>
       <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 20 }}>
-        <div style={caps}>A. Shama Anjum</div>
+        <div style={caps}>Shama Anjum</div>
         <Motif motif={book.motif} color={book.foil} size={96} />
       </div>
     </div>

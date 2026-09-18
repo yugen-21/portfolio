@@ -73,7 +73,7 @@ function BookShelf({ liftedIndex, onBookClick }) {
   return (
     <div className="flex flex-col">
       <React.Suspense fallback={<div style={BOOK_PLACEHOLDER} />}>
-        <ShelfBooks books={BOOKS} brand="A. Shama Anjum" selectedIndex={liftedIndex} onSelect={onBookClick} />
+        <ShelfBooks books={BOOKS} brand="Shama Anjum" selectedIndex={liftedIndex} onSelect={onBookClick} />
       </React.Suspense>
       {/* ShelfBooks ends on the books' base line. The rail's top surface projects to 20px, so
           pulling it up 14 seats the spines on it with 6px of shelf showing in front. */}
@@ -144,7 +144,7 @@ function ViewToggle({ value, onChange }) {
   );
 }
 
-export function Work({ onBrand, selected, onOpen, onClose }) {
+export function Work({ onBrand, onAbout, selected, onOpen, onClose }) {
   const [liftedIndex, setLiftedIndex] = React.useState(null);
   const openerRef = React.useRef(null);
   const [view, setView] = React.useState(readView);
@@ -177,10 +177,11 @@ export function Work({ onBrand, selected, onOpen, onClose }) {
 
       <header className="relative z-[3] flex items-center gap-6 flex-wrap px-[34px] py-[14px] shrink-0">
         <div className="flex items-baseline gap-3.5 cursor-pointer" onClick={onBrand}>
-          <span style={{ fontSize: "var(--text-nav-brand)", fontWeight: 600, letterSpacing: "var(--track-neat)", color: "var(--text-display)" }}>A. Shama Anjum</span>
+          <span style={{ fontSize: "var(--text-nav-brand)", fontWeight: 600, letterSpacing: "var(--track-neat)", color: "var(--text-display)" }}>Shama Anjum</span>
           <span style={{ fontSize: 13, color: "var(--mauve-400)", letterSpacing: "0.02em" }}>Software Engineer</span>
         </div>
         <nav className="flex items-center gap-2 ml-auto">
+          <a onClick={(e) => { e.preventDefault(); onAbout(); }} href="#" style={{ fontSize: "var(--text-ui)", padding: "9px 14px", borderRadius: "var(--radius-pill)", color: "#d9c8f5" }}>About</a>
           <NavLink href="mailto:shamaazath@gmail.com">Email</NavLink>
           <NavLink href="https://www.linkedin.com/in/a-shama-anjum/" external>LinkedIn</NavLink>
           <NavLink href="https://github.com/yugen-21" external emphasis="strong">GitHub</NavLink>
