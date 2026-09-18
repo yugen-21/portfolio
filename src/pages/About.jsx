@@ -97,7 +97,7 @@ export function About({ onBrand, onWork }) {
               scaleOnHover
               labelOnHover
               fadeOut
-              fadeOutColor="#050107"
+              fadeOutColor="var(--void)"
               ariaLabel="Technologies I work with"
             />
           </div>

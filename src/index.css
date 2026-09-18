@@ -22,7 +22,9 @@ html, body {
   background: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  /* clip, not hidden: hidden on both html and body turns body into a scroll
+     container, and position: sticky then pins to body instead of the page. */
+  overflow-x: clip;
 }
 
 * {

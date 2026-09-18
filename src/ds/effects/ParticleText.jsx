@@ -309,7 +309,7 @@ export function ParticleText({
     <div
       ref={containerRef}
       className={className}
-      style={{ position: "relative", display: "block", width: "100%", height: "100%", minHeight: 120, overflow: "hidden", touchAction: "none", ...style }}
+      style={{ position: "relative", display: "block", width: "100%", height: "100%", minHeight: 120, overflow: "hidden", touchAction: "pan-y", ...style }}
       aria-label={text}
     >
       <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, display: "block", width: "100%", height: "100%" }} aria-hidden="true"></canvas>
