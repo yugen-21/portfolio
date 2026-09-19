@@ -7,15 +7,15 @@ import "./FeedTheCat.css";
  * flopping fish onto the cat. Everything is drawn on one canvas on a coarse
  * grid, so motion snaps pixel to pixel the way the dino's does.
  *
- * A feed is posted to /api/feed-cat once per browser (the server also dedupes
- * by hashed IP) and the total shows top right, dino-score style. If the API is
- * unreachable the game still plays; only the score disappears.
+ * Every feed is posted to /api/feed-cat and the running total of fish shows top
+ * right, dino-score style. The server also keeps a hashed set of who has fed the
+ * cat, which is only used to tell a first-timer from a returning one. If the API
+ * is unreachable the game still plays; only the score disappears.
  *
  * Keyboard: a real button sits over the fish — Enter or Space feeds the cat.
  */
 
 const API = "/api/feed-cat";
-const FED_KEY = "fed-the-cat";
 
 /* The board, in board pixels. Sprites are drawn at 2 board pixels per sprite pixel. */
 const W = 220;
@@ -38,9 +38,6 @@ const STARS = [[58, 9], [90, 22], [118, 6], [142, 16], [46, 30], [104, 36], [196
 const PEBBLES = [[12, 78], [37, 80], [66, 77], [93, 81], [121, 78], [150, 80], [178, 77], [204, 81]];
 
 const COLOR = { ground: "#8a70b0", star: "#c4a6ff", text: "#e9d5ff", hint: "#8a70b0" };
-
-const readFed = () => { try { return localStorage.getItem(FED_KEY) === "1"; } catch { return false; } };
-const writeFed = () => { try { localStorage.setItem(FED_KEY, "1"); } catch { /* storage blocked */ } };
 
 const snap = (v) => Math.round(v / P) * P;
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -88,7 +85,6 @@ export function FeedTheCat() {
       hint: true,
       count: null,
       flashUntil: 0,
-      counted: readFed(),
       reduced: false,
       k: 2,
     };
@@ -103,19 +99,16 @@ export function FeedTheCat() {
   const post = async () => {
     const g = game.current;
     let result = null;
-    if (!g.counted) {
-      try {
-        const res = await fetch(API, { method: "POST" });
-        if (res.ok) result = await res.json();
-      } catch { /* offline — the cat still ate */ }
-      if (result) { g.counted = true; writeFed(); }
-    }
+    try {
+      const res = await fetch(API, { method: "POST" });
+      if (res.ok) result = await res.json();
+    } catch { /* offline — the cat still ate */ }
     if (result && typeof result.count === "number") {
       g.count = result.count;
       g.flashUntil = performance.now() + 900;
     }
-    if (result?.first) setMessage(`Nom nom. Thank you! You're one of ${result.count} ${result.count === 1 ? "person" : "people"} who fed my cat.`);
-    else if (result) setMessage("Nom nom. Looks like you've fed my cat before. Thanks for coming back!");
+    if (result?.first) setMessage(`Nom nom. Thank you! That is fish number ${result.count}, and your first.`);
+    else if (result) setMessage(`Nom nom. That is ${result.count} fish my cat has had. Thanks for coming back!`);
     else setMessage("Nom nom. My cat says thank you!");
   };
 
@@ -328,8 +321,8 @@ export function FeedTheCat() {
       aria-labelledby="ftc-title"
       style={{
         position: "relative",
-        width: "min(100%, 500px)",
-        padding: "14px 16px 12px",
+        width: "min(100%, 320px)",
+        padding: "12px 14px 10px",
         background: "#000",
         border: "2px solid rgba(196,166,255,0.45)",
         boxShadow: "4px 4px 0 rgba(124,58,237,0.45), 0 0 48px -14px rgba(168,85,247,0.55)",
@@ -337,9 +330,9 @@ export function FeedTheCat() {
     >
       <h2
         id="ftc-title"
-        style={{ margin: "0 0 12px", fontSize: "var(--text-ui)", fontWeight: 500, lineHeight: "var(--leading-list)", color: "var(--text-body)", textWrap: "pretty" }}
+        style={{ margin: "0 0 8px", fontSize: "var(--text-caps)", fontWeight: 500, letterSpacing: "var(--track-caps)", textTransform: "uppercase", color: "var(--text-muted)", textWrap: "pretty" }}
       >
-        If you have scrolled this far and liked my page, then pls <span style={{ color: "var(--lilac-300)" }}>feed my cat</span>
+        Scrolled this far? <span style={{ color: "var(--lilac-300)" }}>Feed my cat</span>
       </h2>
 
       <div ref={wrapRef} style={{ position: "relative" }}>

@@ -75,7 +75,7 @@ export const Playground = {};
 
 export const AllVariants = {
   name: "All variants",
-  parameters: { docs: { description: { story: "The five presets at their intended sizes. `solid` is the primary action, `violet` the secondary; `outline` is what project panel links use." } } },
+  parameters: { docs: { description: { story: "The five presets at their intended sizes. `solid` is the primary action, `violet` the secondary; `outline` is what project panel links use. Every preset except `solid` traces a pale rim, because `solid` is the only one on a light fill — its rim is violet so there is something to see." } } },
   render: (args) => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center" }}>
       {VARIANTS.map((v) => (

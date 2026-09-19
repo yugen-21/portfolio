@@ -415,6 +415,10 @@ function Cover({ project, book }) {
         transform: "rotateY(180deg)",
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
+        // It lies over the left page while the book is open. A hidden backface is
+        // not reliably skipped in hit testing, so it would eat the page's wheel
+        // and drag events; it is decorative, so nothing needs them.
+        pointerEvents: "none",
       }}
     >
       <div style={caps}>{project.year}</div>

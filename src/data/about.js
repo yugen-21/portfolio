@@ -1,3 +1,30 @@
+/**
+ * The quotes the annotated-quote section cycles through, each with Shama's own
+ * note in the margin beside it. All three are The Office.
+ *
+ * `via` is a second attribution, for a quote being quoted by somebody who
+ * thought it was theirs — on screen the Gretzky line is a whiteboard gag, with
+ * Michael's name written under Gretzky's.
+ */
+export const QUOTES = [
+  {
+    text: "I knew exactly what to do. But in a much more real sense, I had no idea what to do.",
+    attribution: "Michael Scott",
+    note: "Week one as the only developer on a real product. I had never touched Azure. I learnt it on the job, and the pipeline was live by the end of the month.",
+  },
+  {
+    text: "You miss 100% of the shots you don't take.",
+    attribution: "Wayne Gretzky",
+    via: "Michael Scott",
+    note: "I said yes to being the sole developer on two B2B products, end to end, for the same founding team. Both of them shipped.",
+  },
+  {
+    text: "And for my next trick, I will make my career disappear.",
+    attribution: "Jim Halpert",
+    note: "The one I am never saying. Seven products since 2023, and my name goes on all of them.",
+  },
+];
+
 export const WORK_HISTORY = [
   {
     when: "Apr 2026, now",
@@ -67,7 +94,6 @@ export const TECH = mk([
   ["express", "Express"],
   ["mysql", "MySQL"],
   ["mongodb", "MongoDB"],
-  ["styledcomponents", "styled-components"],
   ["storybook", "Storybook"],
   ["css3", "CSS"],
   ["microsoftazure", "Azure Cloud"],

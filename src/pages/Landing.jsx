@@ -9,6 +9,8 @@ import { ROLES } from "../data/projects.js";
 import { SKILLS, SKILLS_COVER, SKILLS_COVER_POSITION } from "../data/skills.jsx";
 import { OrbitCardStack } from "../ds/effects/OrbitCardStack.jsx";
 import { CONTACT } from "../data/contact.jsx";
+import { AboutBlock } from "../components/AboutBlock.jsx";
+import { EyebrowLabel } from "../ds/core/EyebrowLabel.jsx";
 
 /**
  * Only the hero has a light layer: a dithered black-to-violet field that fades
@@ -21,8 +23,7 @@ import { CONTACT } from "../data/contact.jsx";
  * real copy rather than a placeholder.
  */
 const HERO_FADE = "linear-gradient(to bottom, #000 72%, transparent 100%)";
-
-export function Landing({ onViewWork, onViewAbout, backdrop }) {
+export function Landing({ onViewWork, backdrop }) {
   return (
     <div className="relative">
       <div className="relative z-[2] min-h-screen flex flex-col">
@@ -89,12 +90,26 @@ export function Landing({ onViewWork, onViewAbout, backdrop }) {
             className="mt-[34px]"
             style={{ maxWidth: "var(--measure-body)", fontSize: "var(--text-body)", lineHeight: "var(--leading-body)", color: "var(--text-body)", textWrap: "pretty" }}
           >
-            I turn messy problems into products people can actually use. Seven of them since 2023, from a campus outpass system to a platform that diagnoses hospitals.
+            Seven products since 2023, from a campus outpass system to a platform that diagnoses hospitals. I take them from the first conversation to production.
           </p>
 
           <div className="mt-[44px] flex flex-wrap gap-3">
             <SpecularButton variant="solid" size="lg" radius={999} onClick={onViewWork}>View work</SpecularButton>
-            <SpecularButton variant="violet" size="lg" radius={999} onClick={onViewAbout}>About me</SpecularButton>
+            <SpecularButton
+              variant="violet"
+              size="lg"
+              radius={999}
+              onClick={() =>
+                // Jumped, not smooth-scrolled: the skills section is 500vh of
+                // scroll-driven animation, and gliding through it means sitting
+                // out the whole card split on the way to a section further down.
+                document
+                  .getElementById("about")
+                  ?.scrollIntoView({ behavior: "auto", block: "start" })
+              }
+            >
+              About me
+            </SpecularButton>
           </div>
         </main>
       </div>
@@ -107,6 +122,27 @@ export function Landing({ onViewWork, onViewAbout, backdrop }) {
           startLabel="Core skills"
           endLabel="From messy problem to shipped product."
         />
+      </section>
+
+      <section id="about" className="relative z-[3] px-[34px] pt-[86px] pb-[24px]">
+        <EyebrowLabel style={{ color: "var(--text-muted)", marginBottom: 18 }}>
+          About me
+        </EyebrowLabel>
+        <h2
+          style={{
+            margin: "0 0 26px",
+            maxWidth: "20ch",
+            fontFamily: "var(--font-display)",
+            fontWeight: 400,
+            fontSize: "var(--text-title)",
+            lineHeight: "var(--leading-heading)",
+            letterSpacing: "var(--track-snug)",
+            color: "var(--text-display)",
+          }}
+        >
+          Who is behind them
+        </h2>
+        <AboutBlock gutter={34} onViewWork={onViewWork} />
       </section>
 
       <section className="relative z-[3]">

@@ -19,10 +19,9 @@ export default {
       },
     },
   },
-  args: { onViewWork: fn(), onViewAbout: fn() },
+  args: { onViewWork: fn() },
   argTypes: {
-    onViewWork: { action: "view work", description: "Fired by the solid primary button.", table: { category: "Events" } },
-    onViewAbout: { action: "view about", description: "Fired by the violet secondary button.", table: { category: "Events" } },
+    onViewWork: { action: "view work", description: "Fired by the solid primary button. The violet one beside it scrolls to the about section on this same page.", table: { category: "Events" } },
   },
 };
 
