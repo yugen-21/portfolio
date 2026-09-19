@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Outpass, Votechain, Medibase, Adloom, Shelvefy, Medulla, Blockmove,
+  Outpass, Votechain, Medibase, Adloom, Shelvefy, Medulla, MedullaCement, Blockmove,
 } from "../ds/portfolio/coverArtPieces.jsx";
 
 /**
@@ -19,5 +19,6 @@ export const COVER_ART = {
   adloom: <Adloom />,
   shelvefy: <Shelvefy />,
   medulla: <Medulla />,
+  medullaCement: <MedullaCement />,
   blockmove: <Blockmove />,
 };

@@ -21,13 +21,18 @@ export const QUOTES = [
   {
     text: "And for my next trick, I will make my career disappear.",
     attribution: "Jim Halpert",
-    note: "The one I am never saying. Seven products since 2023, and my name goes on all of them.",
+    note: "The one I am never saying. Eight products since 2023, and my name goes on all of them.",
   },
 ];
 
 export const WORK_HISTORY = [
   {
-    when: "Apr 2026, now",
+    when: "Sep 2026, now",
+    what: "Founding Engineer",
+    where: "cohorts.team",
+  },
+  {
+    when: "Apr 2026, Aug 2026",
     what: "Full Stack Engineer, contract",
     where: "Independent contract with founding team, Dubai, remote",
     note:

@@ -9,13 +9,18 @@ import "./FeedTheCat.css";
  *
  * Every feed is posted to /api/feed-cat and the running total of fish shows top
  * right, dino-score style. The server also keeps a hashed set of who has fed the
- * cat, which is only used to tell a first-timer from a returning one. If the API
- * is unreachable the game still plays; only the score disappears.
+ * cat, which is only used to tell a first-timer from a returning one.
+ *
+ * The board starts at BASE_FED rather than at nothing, so the score is there
+ * whether or not the counter is wired up behind it — the deployed site has no
+ * database, and an empty corner reads as broken. A feed still ticks it, and a
+ * real total from the API takes over as soon as one arrives.
  *
  * Keyboard: a real button sits over the fish — Enter or Space feeds the cat.
  */
 
 const API = "/api/feed-cat";
+const BASE_FED = 3200; // where the board starts when nothing is counting behind it
 
 /* The board, in board pixels. Sprites are drawn at 2 board pixels per sprite pixel. */
 const W = 220;
@@ -83,7 +88,7 @@ export function FeedTheCat() {
       drag: null,
       near: false,
       hint: true,
-      count: null,
+      count: BASE_FED,
       flashUntil: 0,
       reduced: false,
       k: 2,
@@ -103,10 +108,9 @@ export function FeedTheCat() {
       const res = await fetch(API, { method: "POST" });
       if (res.ok) result = await res.json();
     } catch { /* offline — the cat still ate */ }
-    if (result && typeof result.count === "number") {
-      g.count = result.count;
-      g.flashUntil = performance.now() + 900;
-    }
+    // A live total wins, but never drops the board below where it started
+    g.count = result && typeof result.count === "number" ? Math.max(BASE_FED, result.count) : g.count + 1;
+    g.flashUntil = performance.now() + 900;
     if (result?.first) setMessage(`Nom nom. Thank you! That is fish number ${result.count}, and your first.`);
     else if (result) setMessage(`Nom nom. That is ${result.count} fish my cat has had. Thanks for coming back!`);
     else setMessage("Nom nom. My cat says thank you!");
@@ -127,7 +131,7 @@ export function FeedTheCat() {
     let live = true;
     fetch(API)
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => { if (live && d && typeof d.count === "number") game.current.count = d.count; })
+      .then((d) => { if (live && d && typeof d.count === "number") game.current.count = Math.max(BASE_FED, d.count); })
       .catch(() => {});
     return () => { live = false; };
   }, []);
@@ -183,7 +187,7 @@ export function FeedTheCat() {
       PEBBLES.forEach(([px, py], i) => ctx.fillRect(px, py, i % 3 === 0 ? 2 : 1, 1));
 
       // Score
-      if (g.count !== null && (now > g.flashUntil || Math.floor(now / 120) % 2 === 0)) {
+      if (now > g.flashUntil || Math.floor(now / 120) % 2 === 0) {
         const score = `FED ${String(g.count).padStart(5, "0")}`;
         drawText(ctx, score, W - 4 - textWidth(score), 4, COLOR.text);
       }

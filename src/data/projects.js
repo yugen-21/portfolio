@@ -123,7 +123,7 @@ export const PROJECTS = [
       "Ask it anything in plain English. It answers from real records, and says so when it is not sure",
     ],
     stack: ["React JS", "Tailwind CSS", "Storybook", "Python FastAPI", "PostgreSQL", "Azure Cloud"],
-    links: [{ label: "View live", href: "https://medulla-ai-frontend.vercel.app" }],
+    links: [{ label: "View live", href: "https://20.57.128.179.sslip.io/" }],
   },
   {
     year: "2026",
@@ -144,7 +144,28 @@ export const PROJECTS = [
       "See who has gone silent, flag it, and switch to someone else",
     ],
     stack: ["React JS", "Tailwind CSS", "Python FastAPI", "PostgreSQL", "Azure Cloud"],
-    links: [{ label: "View live", href: "https://blockmove-frontend.vercel.app/" }],
+    links: [{ label: "View live", href: "https://blockmove-frontend-nu.vercel.app/login" }],
+  },
+  {
+    year: "2026",
+    name: "Medulla for Cement",
+    book: "#5b21b6",
+    caption: "Plant Diagnostics",
+    art: "medullaCement",
+    bg: "linear-gradient(160deg,#2a1052 0%,#07020f 78%)",
+    role: "Transformation modules, built end to end",
+    problem:
+      "A cement plant's performance lives in shift logs, DCS exports and spreadsheets, so improvement work is argued from opinion. Proving a change actually held needs statistics nobody on the floor has time to run, and the projects that do get run are written up afterwards rather than documented as they go.",
+    blurb:
+      "An AI diagnostics platform for cement plants, in three layers: a C-suite brief at the top, plant operations beneath it, and transformation modules underneath that, where improvement projects are actually run. I built the transformation side.",
+    bullets: [
+      "DMAIC projects run end to end in the platform, from charter to detailed process flow to the tools at each phase",
+      "A statistical workbench built in: chi-square, ANOVA and a set of transformation methods, run against the plant's own data",
+      "A project is documented as it runs, not reconstructed from memory once it has finished",
+      "A reading taken on the floor rises through plant operations into the C-suite brief, so leadership is looking at the same number the shift is",
+    ],
+    stack: ["React JS", "Tailwind CSS", "Storybook", "Python FastAPI", "PostgreSQL", "Azure Cloud"],
+    links: [{ label: "View live", href: "https://medullaai.me" }],
   },
 ];
 

@@ -14,10 +14,13 @@ import { useCoverArtScale } from "../hooks/useShelfFit.js";
 // three.js arrives with the Books view rather than with the landing page
 const ShelfBooks = React.lazy(() => import("../ds/portfolio/ShelfBooks.jsx").then((m) => ({ default: m.ShelfBooks })));
 
-const SHELVES = [
-  { offset: 0, projects: PROJECTS.slice(0, 4) },
-  { offset: 4, projects: PROJECTS.slice(4, 7) },
-];
+// The covers view, four to a shelf. Derived from the data rather than written
+// out, so adding a project puts it on a shelf instead of dropping it silently
+const PER_SHELF = 4;
+const SHELVES = Array.from({ length: Math.ceil(PROJECTS.length / PER_SHELF) }, (_, row) => ({
+  offset: row * PER_SHELF,
+  projects: PROJECTS.slice(row * PER_SHELF, (row + 1) * PER_SHELF),
+}));
 
 // Every project on one shelf. Built once so ShelfBooks sees stable items and never rebuilds its scene on a re-render
 const BOOKS = PROJECTS.map((p) => ({ id: p.name, title: p.name, date: p.year, subtitle: p.caption, color: p.book }));

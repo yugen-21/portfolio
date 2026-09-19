@@ -90,7 +90,7 @@ export function Landing({ onViewWork, backdrop }) {
             className="mt-[34px]"
             style={{ maxWidth: "var(--measure-body)", fontSize: "var(--text-body)", lineHeight: "var(--leading-body)", color: "var(--text-body)", textWrap: "pretty" }}
           >
-            Seven products since 2023, from a campus outpass system to a platform that diagnoses hospitals. I take them from the first conversation to production.
+            Eight products since 2023, from a campus outpass system to platforms that diagnose hospitals and cement plants. I take them from the first conversation to production.
           </p>
 
           <div className="mt-[44px] flex flex-wrap gap-3">

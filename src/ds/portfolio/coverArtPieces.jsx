@@ -5,7 +5,7 @@ import { useCoverRaised, prefersReducedMotion } from "./coverMotion.js";
 /**
  * Cover artwork. Each piece animates when its cover is picked up, and the
  * motion is chosen to say something about the project rather than being one
- * shared effect reskinned seven times: the outpass form scrolls, the shelves
+ * shared effect reskinned eight times: the outpass form scrolls, the shelves
  * slide in, the blocks move.
  *
  * Every resting value here matches the authored artwork, so a cover at rest
@@ -536,6 +536,89 @@ function Medulla() {
   );
 }
 
+/* --------------------------------------------------- medulla for cement --
+   The kiln's strata: horizontal bands settle apart and the hot end below them
+   flares. Deliberately not Medulla's concentric rings — same platform, but the
+   two covers have to be told apart on the shelf. */
+const cementMotion = (root, raised, ms) => {
+  animate(q(root, "strata"), {
+    scaleY: raised ? 1.18 : 1,
+    opacity: raised ? 1 : 0.72,
+    duration: ms,
+    ease: "outQuart",
+  });
+  animate(q(root, "burn"), {
+    scale: raised ? 1.3 : 1,
+    opacity: raised ? 1 : 0.7,
+    duration: Math.round(ms * 1.15),
+    ease: "outQuad",
+  });
+  animate(q(root, "line"), {
+    translateY: raised ? -5 : 0,
+    duration: ms,
+    delay: stagger(80),
+    ease: "outBack",
+  });
+};
+
+function MedullaCement() {
+  const ref = useArtMotion(cementMotion);
+  return (
+    <div ref={ref} style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+      <div
+        data-art="strata"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "repeating-linear-gradient(0deg, rgba(168,85,247,0.26) 0 1px, transparent 1px 15px)",
+          opacity: 0.72,
+        }}
+      />
+      <div
+        data-art="burn"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at 50% 84%, rgba(216,180,254,0.30), transparent 60%)",
+          opacity: 0.7,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 8,
+        }}
+      >
+        <div
+          data-art="line"
+          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,2.9vw,40px)", color: "#fff" }}
+        >
+          Medulla
+        </div>
+        <div
+          data-art="line"
+          style={{
+            fontSize: "var(--text-caps-xs)",
+            letterSpacing: "var(--track-wide)",
+            color: "var(--lilac-300)",
+            textTransform: "uppercase",
+            paddingLeft: "0.42em",
+          }}
+        >
+          Cement Plants
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* --------------------------------------------------------------- blockmove --
    Cargo shifting: the solid block swings further round and drifts, the outline
    counter-rotates away from it. */
@@ -623,4 +706,4 @@ function Blockmove() {
   );
 }
 
-export { Outpass, Votechain, Medibase, Adloom, Shelvefy, Medulla, Blockmove };
+export { Outpass, Votechain, Medibase, Adloom, Shelvefy, Medulla, MedullaCement, Blockmove };
