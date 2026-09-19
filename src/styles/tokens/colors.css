@@ -1,6 +1,6 @@
 :root {
   /* --- Void / ink: near-black purples used for page and card grounds --- */
-  --void: #050107;
+  --void: #000000;             /* pitch black; the purple lives on top of it */
   --ink-900: #07020f;
   --ink-800: #0b0416;
   --ink-700: #100526;

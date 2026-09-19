@@ -27,3 +27,6 @@ storybook-static
 *.sln
 *.sw?
 .vercel
+
+# Local "feed my cat" counter (npm run dev)
+.data

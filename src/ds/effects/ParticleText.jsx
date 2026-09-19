@@ -436,7 +436,7 @@ export function ParticleText({
         height: "100%",
         minHeight: 120,
         overflow: "hidden",
-        touchAction: "none",
+        touchAction: "pan-y",
         ...style,
       }}
       aria-label={text}

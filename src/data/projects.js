@@ -2,6 +2,7 @@ export const PROJECTS = [
   {
     year: "2023",
     name: "University Outpass System",
+    book: "#2d1063",
     caption: "Student Dashboard",
     art: "outpass",
     bg: "linear-gradient(155deg,#1b0b3a 0%,#2d1063 55%,#160732 100%)",
@@ -22,6 +23,7 @@ export const PROJECTS = [
   {
     year: "2024",
     name: "Votechain",
+    book: "#1a0630",
     caption: "32-Hour Hackathon",
     art: "votechain",
     bg: "#0b0416",
@@ -42,6 +44,7 @@ export const PROJECTS = [
   {
     year: "2025",
     name: "Medibase",
+    book: "#e9dcff",
     caption: "Encrypted Medical Records",
     art: "medibase",
     bg: "linear-gradient(165deg,#e9dcff 0%,#c8b0f0 60%,#a98ede 100%)",
@@ -63,6 +66,7 @@ export const PROJECTS = [
   {
     year: "2025",
     name: "Adloom AI",
+    book: "#6d28d9",
     caption: "Billboard Marketplace",
     art: "adloom",
     bg: "linear-gradient(200deg,#6d28d9 0%,#3b0f7a 48%,#12042a 100%)",
@@ -83,6 +87,7 @@ export const PROJECTS = [
   {
     year: "2025",
     name: "Shelvefy AI",
+    book: "#3b0f7a",
     caption: "Retail Shelf Space",
     art: "shelvefy",
     bg: "#100526",
@@ -102,6 +107,7 @@ export const PROJECTS = [
   {
     year: "2026",
     name: "MedullaAI",
+    book: "#c084fc",
     caption: "Built Solo",
     art: "medulla",
     bg: "#07020f",
@@ -122,6 +128,7 @@ export const PROJECTS = [
   {
     year: "2026",
     name: "BlockMove",
+    book: "#4c1d95",
     caption: "Breakbulk Logistics",
     art: "blockmove",
     bg: "linear-gradient(145deg,#2a1052 0%,#0d0320 70%)",

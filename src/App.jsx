@@ -1,12 +1,19 @@
 import React from "react";
 import { Landing } from "./pages/Landing.jsx";
 import { Work } from "./pages/Work.jsx";
-import { About } from "./pages/About.jsx";
-import { Particles } from "./ds/backdrop/Particles.jsx";
+import { Starfield } from "./ds/backdrop/Starfield.jsx";
+import { SiteFooter } from "./components/SiteFooter.jsx";
 
+/**
+ * Two views: the landing page, which carries the about content in its own
+ * section, and the work page. "About" anywhere is a jump to that section, not
+ * a page of its own.
+ */
 export default function App() {
   const [view, setView] = React.useState("landing");
   const [selected, setSelected] = React.useState(null);
+  // Set when a navigation should land on a section rather than the top
+  const anchor = React.useRef(null);
 
   const closePanel = React.useCallback(() => setSelected(null), []);
 
@@ -16,44 +23,41 @@ export default function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, [closePanel]);
 
-  const goto = (next) => {
+  // After the view has swapped, either go to the requested section or to the top
+  React.useLayoutEffect(() => {
+    const target = anchor.current;
+    anchor.current = null;
+    if (!target) return;
+    document.getElementById(target)?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, [view]);
+
+  const goto = (next, section) => {
     setSelected(null);
     setView(next);
-    window.scrollTo(0, 0);
+    if (section) anchor.current = section;
+    else window.scrollTo(0, 0);
   };
 
   return (
     <>
       <div style={{ position: "fixed", inset: 0, zIndex: 1, pointerEvents: "none" }}>
-        <Particles
-          particleColors={["#c4a6ff", "#a855f7", "#ede4ff"]}
-          particleCount={140}
-          particleSpread={14}
-          speed={0.06}
-          particleBaseSize={60}
-          sizeRandomness={1}
-          alphaParticles
-          moveParticlesOnHover
-          particleHoverFactor={0.4}
-          pixelRatio={1}
-        />
+        <Starfield />
       </div>
 
-      {view === "landing" && (
-        <Landing onViewWork={() => goto("work")} onViewAbout={() => goto("about")} />
-      )}
+      {view === "landing" && <Landing onViewWork={() => goto("work")} />}
       {view === "work" && (
         <Work
           onBrand={() => goto("landing")}
-          onAbout={() => goto("about")}
+          onAbout={() => goto("landing", "about")}
           selected={selected}
           onOpen={setSelected}
           onClose={closePanel}
         />
       )}
-      {view === "about" && (
-        <About onBrand={() => goto("landing")} onWork={() => goto("work")} />
-      )}
+
+      {/* The work view is the one page without it: the footer's credit line
+          and cat game sit under the landing page only */}
+      {view !== "work" && <SiteFooter />}
     </>
   );
 }

@@ -17,7 +17,7 @@ function useParallax(ref, enabled) {
 const VIGNETTE = {
   position: "absolute",
   inset: 0,
-  background: "radial-gradient(ellipse at 50% 40%, rgba(5,1,7,0) 30%, rgba(5,1,7,0.65) 78%, #050107 100%)",
+  background: "radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.65) 78%, #000 100%)",
 };
 
 const SCAN = {

@@ -1,0 +1,33 @@
+/* Hover and focus only. Layout and the scroll-driven scatter are inline motion
+   values on the <li>; this lifts the face inside it so the two never fight
+   over the same transform. */
+.orbit-card {
+  display: block;
+  border-radius: 26px;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.orbit-card__face {
+  /* the violet bloom is what separates a card from a pitch-black page */
+  box-shadow:
+    0 26px 60px -24px rgba(0, 0, 0, 0.85),
+    0 0 70px -24px rgba(168, 85, 247, 0.55);
+  transition:
+    transform var(--dur-hover) var(--ease-rise),
+    box-shadow var(--dur-hover) var(--ease-rise);
+}
+
+.orbit-card:hover .orbit-card__face {
+  transform: translateY(-6px);
+}
+
+.orbit-card:focus-visible .orbit-card__face {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 2px #000,
+    0 0 0 4px var(--violet-300),
+    0 26px 60px -24px rgba(0, 0, 0, 0.85),
+    0 0 70px -24px rgba(168, 85, 247, 0.55);
+}

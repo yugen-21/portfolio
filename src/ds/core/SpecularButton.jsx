@@ -30,6 +30,7 @@ uniform float uShineSize;
 uniform float uShineFade;
 uniform float uThickness;
 uniform float uBaseWidth;
+uniform float uEdgeWidth;
 
 out vec4 fragColor;
 
@@ -57,7 +58,7 @@ void main() {
   float phi = acos(clamp(abs(dot(nEll, L)), 0.0, 1.0));
   float rim = 1.0 - smoothstep(uShineSize - uShineFade, uShineSize + uShineFade + 1e-4, phi);
   float line = gaussianLine(d, uThickness);
-  float edgeClamp = 1.0 - smoothstep(0.5 * uPx, 3.0 * uPx, abs(d));
+  float edgeClamp = 1.0 - smoothstep(0.5 * uPx, uEdgeWidth, abs(d));
   float hi = line * rim * edgeClamp * uIntensity;
 
   vec3 col = uBaseColor * base + uLineColor * hi;
@@ -67,12 +68,18 @@ void main() {
 `;
 
 const VARIANTS = {
-  solid:   { tint: "#ede4ff", tintOpacity: 1,    textColor: "#1a0630", lineColor: "#ffffff", baseColor: "#8b5cf6", intensity: 1.1 },
+  // solid is the one preset on a light fill. A rim drawn *on* it is invisible
+  // whatever the colour, so its highlight is wide and bright and blooms off the
+  // edge into the black page — the same read as the dark presets, in pink.
+  solid:   { tint: "#ede4ff", tintOpacity: 1,    textColor: "#1a0630", lineColor: "#f0abfc", baseColor: "#a855f7", intensity: 1.5, thickness: 3, baseWidth: 4, edgeWidth: 13 },
   violet:  { tint: "#a855f7", tintOpacity: 0.06, textColor: "#f5f0ff", lineColor: "#c4a6ff", baseColor: "#4a2d7a", intensity: 1 },
   deep:    { tint: "#6d28d9", tintOpacity: 0.92, textColor: "#f5f0ff", lineColor: "#d8b4fe", baseColor: "#3b0f7a", intensity: 1.15 },
   outline: { tint: "#a855f7", tintOpacity: 0,    textColor: "#d8b4fe", lineColor: "#a855f7", baseColor: "#5b21b6", intensity: 0.9 },
   ghost:   { tint: "#a855f7", tintOpacity: 0.04, textColor: "#8a70b0", lineColor: "#8a70b0", baseColor: "#2a1052", intensity: 0.55 },
 };
+
+/* How far the rim reaches, when a variant does not say otherwise */
+const RIM = { thickness: 1, baseWidth: 1, edgeWidth: 3 };
 
 const hexToRgb = (hex) => {
   let s = String(hex).trim().replace("#", "");
@@ -103,7 +110,9 @@ export function SpecularButton({
   intensity,
   shineSize = 10,
   shineFade = 40,
-  thickness = 1,
+  thickness,
+  baseWidth,
+  edgeWidth,
   speed = 0.35,
   followMouse = true,
   proximity = 250,
@@ -123,11 +132,14 @@ export function SpecularButton({
   const rLineColor = lineColor ?? v.lineColor;
   const rBaseColor = baseColor ?? v.baseColor;
   const rIntensity = intensity ?? v.intensity;
+  const rThickness = thickness ?? v.thickness ?? RIM.thickness;
+  const rBaseWidth = baseWidth ?? v.baseWidth ?? RIM.baseWidth;
+  const rEdgeWidth = edgeWidth ?? v.edgeWidth ?? RIM.edgeWidth;
 
   const btnRef = React.useRef(null);
   const fxRef = React.useRef(null);
   const propsRef = React.useRef({});
-  propsRef.current = { radius, lineColor: rLineColor, baseColor: rBaseColor, intensity: rIntensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
+  propsRef.current = { radius, lineColor: rLineColor, baseColor: rBaseColor, intensity: rIntensity, shineSize, shineFade, thickness: rThickness, baseWidth: rBaseWidth, edgeWidth: rEdgeWidth, speed, followMouse, proximity, autoAnimate };
 
   React.useEffect(() => {
     const btn = btnRef.current;
@@ -160,14 +172,13 @@ export function SpecularButton({
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
     const U = {};
-    ["uCenter", "uHalfSize", "uRadius", "uAngle", "uPx", "uLineColor", "uBaseColor", "uIntensity", "uShineSize", "uShineFade", "uThickness", "uBaseWidth"]
+    ["uCenter", "uHalfSize", "uRadius", "uAngle", "uPx", "uLineColor", "uBaseColor", "uIntensity", "uShineSize", "uShineFade", "uThickness", "uBaseWidth", "uEdgeWidth"]
       .forEach((n) => { U[n] = gl.getUniformLocation(program, n); });
 
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.uniform1f(U.uPx, dpr);
-    gl.uniform1f(U.uBaseWidth, dpr);
     fx.appendChild(canvas);
 
     const sizeRef = { w: 1, h: 1 };
@@ -236,6 +247,8 @@ export function SpecularButton({
       gl.uniform1f(U.uShineSize, (p.shineSize * Math.PI) / 180);
       gl.uniform1f(U.uShineFade, (p.shineFade * Math.PI) / 180);
       gl.uniform1f(U.uThickness, p.thickness * dpr);
+      gl.uniform1f(U.uBaseWidth, p.baseWidth * dpr);
+      gl.uniform1f(U.uEdgeWidth, p.edgeWidth * dpr);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
